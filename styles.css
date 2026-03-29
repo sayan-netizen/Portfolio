@@ -5,7 +5,13 @@
     --text-primary: #ffffff;
     --text-secondary: #a1a1aa;
     --accent: #ffffff;
-    --nav-bg: rgba(13, 13, 13, 0.85);
+    --nav-bg: rgba(13, 13, 13, 0.5);
+
+    --glass-bg: rgba(26, 26, 26, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --brutal-border: 2px solid var(--text-primary);
+    --brutal-shadow: 6px 6px 0px 0px var(--text-primary);
+    --brutal-shadow-hover: 2px 2px 0px 0px var(--text-primary);
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -84,9 +90,10 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     background: var(--nav-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: var(--brutal-border);
 }
 
 .logo {
@@ -130,7 +137,9 @@ a:hover {
     left: 100%;
     width: 100%;
     height: 100vh;
-    background: var(--bg-color);
+    background: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -161,22 +170,24 @@ a:hover {
 .btn {
     display: inline-block;
     padding: 1rem 2.5rem;
-    background-color: var(--text-primary);
-    color: var(--bg-color);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    transition: transform var(--transition-fast), background var(--transition-fast);
-    border: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
     cursor: pointer;
 }
 
 .btn:hover {
-    background-color: #e5e5e5;
-    transform: translateY(-2px);
-    color: var(--bg-color);
+    background-color: var(--surface-hover);
+    transform: translate(4px, 4px);
+    box-shadow: var(--brutal-shadow-hover);
+    color: var(--text-primary);
 }
 
 /* Hero Section */
@@ -204,8 +215,10 @@ a:hover {
 
 .about-image {
     position: relative;
-    border-radius: 4px;
-    overflow: hidden;
+    border-radius: 0;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    background-color: var(--surface-color);
 }
 
 .about-image img {
@@ -214,6 +227,7 @@ a:hover {
     object-fit: cover;
     filter: grayscale(100%);
     transition: filter var(--transition-slow);
+    display: block;
 }
 
 .about-image:hover img {
@@ -223,13 +237,17 @@ a:hover {
 .about-image .badge {
     position: absolute;
     bottom: 2rem;
-    right: -1rem;
-    background: var(--surface-color);
+    right: -2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 1rem 2rem;
     font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    color: var(--text-primary);
 }
 
 .about-text h2 {
@@ -282,8 +300,11 @@ a:hover {
     position: relative;
     overflow: hidden;
     margin-bottom: 1.5rem;
-    border-radius: 4px;
+    border-radius: 0;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
     background-color: var(--surface-color);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .project-image-wrapper img {
@@ -291,6 +312,7 @@ a:hover {
     height: 600px;
     object-fit: cover;
     transition: transform var(--transition-slow);
+    display: block;
 }
 
 .overlay {
@@ -299,9 +321,16 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+    background: var(--glass-bg);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     opacity: 0;
     transition: opacity var(--transition-fast);
+}
+
+.project-card:hover .project-image-wrapper {
+    transform: translate(4px, 4px);
+    box-shadow: var(--brutal-shadow-hover);
 }
 
 .project-card:hover .project-image-wrapper img {
@@ -340,10 +369,12 @@ a:hover {
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: var(--brutal-border);
+    box-shadow: 2px 2px 0px 0px var(--text-primary);
+    background: var(--surface-color);
     padding: 0.4rem 1rem;
-    border-radius: 50px;
     display: inline-block;
+    font-weight: 600;
 }
 
 /* Split Section (Experience / Education) */
@@ -401,16 +432,20 @@ a:hover {
 }
 
 .skill-card {
-    background: var(--surface-color);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 3rem 2rem;
-    border-radius: 4px;
-    transition: transform var(--transition-fast), background var(--transition-fast);
-    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 0;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
 }
 
 .skill-card:hover {
-    transform: translateY(-5px);
-    background: var(--surface-hover);
+    transform: translate(4px, 4px);
+    box-shadow: var(--brutal-shadow-hover);
+    background: rgba(38, 38, 38, 0.6);
 }
 
 .icon-wrapper {
@@ -448,21 +483,24 @@ a:hover {
 }
 
 .course-card {
-    padding: 2rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    background: var(--surface-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: padding var(--transition-fast);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.course-card:first-child {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
+
 
 .course-card:hover {
-    padding-left: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    padding-left: 2.5rem;
+    background: var(--surface-hover);
+    transform: translate(4px, 4px);
+    box-shadow: var(--brutal-shadow-hover);
 }
 
 .course-info h4 {
@@ -517,16 +555,18 @@ input, textarea {
     width: 100%;
     padding: 1.5rem;
     background: var(--surface-color);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
     color: var(--text-primary);
     font-family: inherit;
     font-size: 0.95rem;
-    transition: border-color var(--transition-fast);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 input:focus, textarea:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.5);
+    transform: translate(4px, 4px);
+    box-shadow: var(--brutal-shadow-hover);
 }
 
 input::placeholder, textarea::placeholder {
